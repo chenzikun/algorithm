@@ -29,7 +29,3 @@ class BiTreeNode:
         self.left = left
         self.right = right
         self.value = value
-
-
-
-
