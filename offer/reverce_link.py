@@ -28,6 +28,22 @@ def recurse(head, newhead):  # 递归，head为原链表的头结点，newhead�
         head.next = None
 
 
+def reverse_list(head):
+    # 三要素
+    # 1.明确函数功能，该函数可以将链表反转，并返回一个头节点
+    # 2.结束条件：当链表为空或只有一个节点时返回
+    if head == None or head.next == None:
+        return head
+    # 3.等价条件（缩小范围），对于数组来讲，缩小范围是n——>n-1，对于链表来讲则可以考虑head——>head.next
+    reverse = reverse_list(head.next)  # 假设reverse是head以后的、已经反转过的链表
+
+    # 接下来要做的是将head节点接到已经反转过的reverse上
+    
+    head.next.next = head
+    head.next = None
+
+    return reverse  # 返回新的列表
+
 def reverse_link(head):
     """循环的方法反转链表"""
     if head is None or head.next is None:
