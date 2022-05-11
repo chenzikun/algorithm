@@ -22,6 +22,7 @@ def swap(items, i, j):
     items[i] = items[j]
     items[j] = temp
 
+
 # 冒泡排序法
 def bubble_sort(items):
     for i in range(len(items)):
@@ -87,19 +88,21 @@ class Solution:
         return nums
 
 
-
 # 快排
 def partition(items, low, high):
     pivot = items[low]
     while low < high:
+        # 发现较小值
         while low < high and items[high] >= pivot:
             high -= 1
         items[low] = items[high]
+        # 发现较大值
         while low < high and items[low] <= pivot:
             low += 1
         items[high] = items[low]
     items[low] = pivot
     return low
+
 
 def quick_sort(items, low=None, high=None):
     if low is None:
@@ -107,13 +110,44 @@ def quick_sort(items, low=None, high=None):
     if high is None:
         high = len(items) - 1
     if low < high:
-        pivot = partition(items, low, high)
-        quick_sort(items, low, pivot-1)
-        quick_sort(items, pivot+1, high)
+        pivot_index = partition(items, low, high)
+        quick_sort(items, low, pivot_index - 1)
+        quick_sort(items, pivot_index + 1, high)
 
 
 if __name__ == '__main__':
-    items =  [fake.random_int() for _ in range(10)]
+    items = [fake.random_int() for _ in range(10)]
     print(items)
     quick_sort(items)
     print(items)
+
+
+def partition(items, low, high):
+    pivot = items[low]
+    while low < high and items[high] >= pivot:
+        high -= 1
+    items[low]= items[high]
+    while low < high and items[low] <= pivot:
+        low += 1
+    items[high] = items[low]
+    items[low] = pivot
+    return low
+
+
+
+
+
+
+
+
+
+
+def _quick_sort(items, low=None, high=None):
+    if low is None:
+        low = 0
+    if high is None:
+        high = len(items) - 1
+    while low < high:
+        pivot = partition(items, low, high)
+        _quick_sort(items, low, pivot - 1)
+        _quick_sort(items, pivot + 1, high)
